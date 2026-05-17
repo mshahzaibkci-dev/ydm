@@ -111,10 +111,10 @@ QWidget* MainWindow::makeSidebar() {
     m_brandLogo->setFixedSize(30, 30);
     brandH->addWidget(m_brandLogo);
 
-    m_brandLabel = new QLabel(u"<b>RAIN<span style='color:#a89df8'>AX</span></b>"_qs);
+    m_brandLabel = new QLabel(u"<b>RAIN<span style='color:#0078d4'>AX</span></b>"_qs);
     m_brandLabel->setStyleSheet(
-        u"font-size: 17px; font-weight: 800; letter-spacing: 1px; "
-        u"color: #eef2ff; background: transparent; border: none;"_qs);
+        u"font-size: 16px; font-weight: 700; letter-spacing: 0.5px; "
+        u"background: transparent; border: none;"_qs);
     m_brandLabel->setTextFormat(Qt::RichText);
     brandH->addWidget(m_brandLabel, 1);
 
@@ -132,7 +132,7 @@ QWidget* MainWindow::makeSidebar() {
     // Separator
     auto* sep = new QFrame;
     sep->setFrameShape(QFrame::HLine);
-    sep->setStyleSheet(u"background: #1a2848; border: none; max-height: 1px;"_qs);
+    sep->setStyleSheet(u"background: rgba(128,128,128,0.20); border: none; max-height: 1px;"_qs);
     lay->addWidget(sep);
     lay->addSpacing(8);
 
@@ -167,19 +167,19 @@ QWidget* MainWindow::makeSidebar() {
     m_livePill->setObjectName(u"livePill"_qs);
     m_livePill->setFixedHeight(32);
     m_livePill->setStyleSheet(
-        u"QFrame#livePill { background: rgba(12,207,138,0.10); "
-        u"border: 1px solid rgba(12,207,138,0.22); border-radius: 10px; "
-        u"margin: 0px 12px 10px 12px; }"_qs);
+        u"QFrame#livePill { background: rgba(76,175,125,0.10); "
+        u"border: 1px solid rgba(76,175,125,0.25); border-radius: 4px; "
+        u"margin: 0px 10px 10px 10px; }"_qs);
     auto* pillH = new QHBoxLayout(m_livePill);
     pillH->setContentsMargins(10, 0, 10, 0);
     pillH->setSpacing(6);
 
     m_liveDot = new QLabel(u"●"_qs);
-    m_liveDot->setStyleSheet(u"color: #0fcf8a; font-size: 10px; background: transparent; border: none;"_qs);
+    m_liveDot->setStyleSheet(u"color: #4caf7d; font-size: 9px; background: transparent; border: none;"_qs);
     pillH->addWidget(m_liveDot);
 
     m_liveLabel = new QLabel(u"Idle"_qs);
-    m_liveLabel->setStyleSheet(u"color: #0fcf8a; font-size: 11px; font-weight: 600; background: transparent; border: none;"_qs);
+    m_liveLabel->setStyleSheet(u"color: #4caf7d; font-size: 11px; font-weight: 600; background: transparent; border: none;"_qs);
     pillH->addWidget(m_liveLabel, 1);
 
     lay->addWidget(m_livePill);
@@ -204,7 +204,7 @@ QWidget* MainWindow::makeHeader() {
     titleCol->setSpacing(2);
     auto* title = new QLabel(u"RAINAX Download Manager"_qs);
     title->setObjectName(u"sectionTitle"_qs);
-    title->setStyleSheet(u"font-size: 16px; font-weight: 800; letter-spacing: 0.4px;"_qs);
+    title->setStyleSheet(u"font-size: 15px; font-weight: 700; letter-spacing: 0.2px;"_qs);
     auto* sub = new QLabel(u"Fast • Reliable • Modern"_qs);
     sub->setObjectName(u"sectionSub"_qs);
     titleCol->addWidget(title);
@@ -214,10 +214,10 @@ QWidget* MainWindow::makeHeader() {
     hlay->addStretch(1);
 
     // Stat boxes
-    m_statActive = new StatBox(u"ACTIVE"_qs, u"0"_qs, u"#7c6ef5"_qs);
-    m_statQueue  = new StatBox(u"QUEUED"_qs, u"0"_qs, u"#f6a614"_qs);
-    m_statDone   = new StatBox(u"DONE"_qs,   u"0"_qs, u"#0fcf8a"_qs);
-    m_statSpeed  = new StatBox(u"SPEED"_qs,  u"—"_qs, u"#60a5fa"_qs);
+    m_statActive = new StatBox(u"ACTIVE"_qs, u"0"_qs, u"#0078d4"_qs);
+    m_statQueue  = new StatBox(u"QUEUED"_qs, u"0"_qs, u"#e8a317"_qs);
+    m_statDone   = new StatBox(u"DONE"_qs,   u"0"_qs, u"#4caf7d"_qs);
+    m_statSpeed  = new StatBox(u"SPEED"_qs,  u"—"_qs, u"#4db8ff"_qs);
     hlay->addWidget(m_statActive);
     hlay->addWidget(m_statQueue);
     hlay->addWidget(m_statDone);
@@ -391,7 +391,7 @@ QWidget* MainWindow::makeQueuePage() {
     emptyV->addStretch();
     auto* emptyLbl = new QLabel(u"📥  No downloads yet\nPaste a URL above and press Download"_qs);
     emptyLbl->setAlignment(Qt::AlignCenter);
-    emptyLbl->setStyleSheet(u"color: #4a5d7a; font-size: 15px; background: transparent; border: none;"_qs);
+    emptyLbl->setStyleSheet(u"color: #888888; font-size: 14px; background: transparent; border: none;"_qs);
     emptyLbl->setWordWrap(true);
     emptyV->addWidget(emptyLbl);
     emptyV->addStretch();
@@ -452,10 +452,7 @@ QWidget* MainWindow::makeCompletedPage() {
     emptyV->addStretch();
     auto* emptyLbl = new QLabel(u"✅  No completed downloads yet"_qs);
     emptyLbl->setAlignment(Qt::AlignCenter);
-    emptyLbl->setStyleSheet(u"color: #4a5d7a; font-size: 15px; background: transparent; border: none;"_qs);
-    emptyV->addWidget(emptyLbl);
-    emptyV->addStretch();
-    m_completedStack->addWidget(emptyPage);   // 0
+    emptyLbl->setStyleSheet(u"color: #888888; font-size: 14px; background: transparent; border: none;"_qs);
 
     m_completedTable = new QTableWidget(0, 4);
     m_completedTable->setHorizontalHeaderLabels({
