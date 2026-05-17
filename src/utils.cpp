@@ -57,14 +57,50 @@ QString sanitizeFilename(const QString& name, const QString& fallback) {
 // ─────────────────────────────────────────────
 //  Path traversal guard
 // ─────────────────────────────────────────────
+//
+//  Design notes
+//  ────────────
+//  canonicalPath() resolves symlinks AND requires the path to already
+//  exist on disk.  For a file that is about to be *created* (e.g. a
+//  download target) it returns "" on every platform, which made the
+//  old startsWith() check vacuously true for any input — a security
+//  hole, and also the direct cause of the "filename escapes output dir"
+//  runtime error when the caller treated "" as a signal for failure.
+//
+//  Fix: use canonicalPath() only for the base directory (which always
+//  exists) so we get the real, symlink-resolved anchor.  For the
+//  candidate path we use QDir::cleanPath(), which is purely lexical —
+//  it collapses ".", "..", and duplicate separators without touching
+//  the file system — then build an absolute path manually.
+//
+//  The containment check uses a separator-aware prefix test so that
+//  a baseDir of "/foo/bar" does not accidentally accept "/foo/barbaz".
 std::optional<QString> safeJoin(const QString& baseDir, const QString& part) {
-    try {
-        QString baseReal = QDir(baseDir).canonicalPath();
-        QString candidate = QDir(QDir(baseDir).filePath(part)).canonicalPath();
-        if (candidate.startsWith(baseReal))
-            return candidate;
-    } catch (...) {}
-    return std::nullopt;
+    if (baseDir.isEmpty() || part.isEmpty())
+        return std::nullopt;
+
+    // Resolve the base to its real, absolute, symlink-free path.
+    // canonicalPath() is safe here because baseDir must already exist.
+    const QString baseReal = QDir(baseDir).canonicalPath();
+    if (baseReal.isEmpty())          // baseDir does not exist
+        return std::nullopt;
+
+    // Build an absolute candidate path without touching the file system.
+    // QDir::cleanPath() collapses "..", ".", "//" and normalises separators.
+    const QString raw       = QDir(baseReal).filePath(part); // baseReal + sep + part
+    const QString candidate = QDir::cleanPath(raw);          // lexical normalisation only
+
+    // Separator-aware prefix check:
+    //   candidate must equal baseReal  OR  start with  baseReal + '/'
+    // This prevents  "/downloads"  from matching  "/downloads-evil/file".
+    const bool contained =
+        candidate == baseReal ||
+        candidate.startsWith(baseReal + QLatin1Char('/'));
+
+    if (!contained)
+        return std::nullopt;
+
+    return candidate;
 }
 
 // ─────────────────────────────────────────────
