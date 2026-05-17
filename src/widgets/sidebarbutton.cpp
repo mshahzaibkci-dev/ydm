@@ -15,6 +15,6 @@ SidebarButton::SidebarButton(const QString& text, const QIcon& icon, QWidget* pa
 }
 
 void SidebarButton::setExpanded(bool expanded) {
-    setText(expanded ? m_text : {});
-    setToolTip(expanded ? {} : m_text);
+    setText(expanded ? m_text : QString());
+    setToolTip(expanded ? QString() : m_text);
 }

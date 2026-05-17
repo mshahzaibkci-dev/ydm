@@ -83,7 +83,7 @@ void GenericFileWorker::run() {
         // Probe filename via HEAD
         QString filename;
         {
-            QNetworkRequest req(finalUrl);
+            QNetworkRequest req{QUrl(finalUrl)};
             req.setRawHeader("User-Agent", UA);
             req.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
                              QNetworkRequest::NoLessSafeRedirectPolicy);
@@ -154,7 +154,7 @@ void GenericFileWorker::run() {
         .arg(existingSize).arg(fmtSize(existingSize)));
 
     // ── Step 3: Send HTTP request (with optional Range header) ────────────
-    QNetworkRequest req(QUrl(finalUrl));
+    QNetworkRequest req{QUrl(finalUrl)};
     req.setRawHeader("User-Agent", UA);
     if (existingSize > 0) {
         req.setRawHeader("Range",
@@ -192,7 +192,7 @@ void GenericFileWorker::run() {
         existingSize = 0;
         item->bytesDownloaded = 0;
 
-        QNetworkRequest req2(QUrl(finalUrl));
+        QNetworkRequest req2{QUrl(finalUrl)};
         req2.setRawHeader("User-Agent", UA);
         reply = nam.get(req2);
         QEventLoop loop2;

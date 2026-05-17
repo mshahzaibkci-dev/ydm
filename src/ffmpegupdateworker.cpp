@@ -32,7 +32,7 @@ void FfmpegUpdateWorker::run() {
     tmpZip.setAutoRemove(true);
 
     QNetworkAccessManager nam;
-    QNetworkRequest req(QUrl(QLatin1StringView(RELEASES_URL)));
+    QNetworkRequest req{QUrl(QString::fromLatin1(RELEASES_URL))};
     req.setRawHeader("User-Agent", "RAINAX-Updater/2.0");
 
     QNetworkReply* reply = nam.get(req);
