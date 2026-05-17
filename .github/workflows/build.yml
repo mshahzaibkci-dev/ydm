@@ -67,7 +67,7 @@ jobs:
         shell: cmd
         run: |
           mkdir dist
-          copy build\${{ env.APP_NAME }}.exe dist\
+          copy build\Release\${{ env.APP_NAME }}.exe dist\
           windeployqt ^
             --release ^
             --no-quick-import ^
