@@ -27,7 +27,7 @@ jobs:
 #  WINDOWS  (MSVC 2022, x64)
 # ────────────────────────────────────────────────────────────
   build-windows:
-    name: Windows · MSVC 2022 · Qt ${{ env.QT_VERSION }}
+    name: Windows · MSVC 2022 · Qt 6.8.3
     runs-on: windows-2022
 
     steps:
@@ -107,7 +107,7 @@ jobs:
 #  LINUX  (Ubuntu 22.04, GCC 12, x86_64)
 # ────────────────────────────────────────────────────────────
   build-linux:
-    name: Linux · GCC 12 · Qt ${{ env.QT_VERSION }}
+    name: Linux · GCC 12 · Qt 6.8.3
     runs-on: ubuntu-22.04
 
     steps:
@@ -246,7 +246,7 @@ jobs:
 #  macOS  (macOS 14 arm64, Clang, Qt universal)
 # ────────────────────────────────────────────────────────────
   build-macos:
-    name: macOS · Clang · Qt ${{ env.QT_VERSION }}
+    name: macOS · Clang · Qt 6.8.3
     runs-on: macos-14         # Apple Silicon (arm64); change to macos-13 for Intel
 
     steps:
