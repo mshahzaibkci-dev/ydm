@@ -1,0 +1,10 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+  <qresource prefix="/icons">
+    <!-- Place all PNG icon files in resources/icons/ directory -->
+    <!-- e.g. menu.png, download.png, completed.png, history.png,
+              logs.png, settings.png, schedule.png, pause.png,
+              resume.png, cancel.png, add.png, folder.png,
+              tray.png, logo.png, clock.png -->
+  </qresource>
+</RCC>
