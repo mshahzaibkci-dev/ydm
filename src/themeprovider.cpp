@@ -67,21 +67,12 @@ bool ThemeProvider::isDark() { return s_isDark; }
 QString ThemeProvider::applyDark()  { s_isDark = true;  return buildStyleSheet(dark()); }
 QString ThemeProvider::applyLight() { s_isDark = false; return buildStyleSheet(light()); }
 
-// ─────────────────────────────────────────────────────────────────────────────
-//  Qt Style Sheet — Professional / IDM-class
-//
-//  Arg map (slots unchanged — all callers compile as-is):
-//  %1  bg_primary    %2  bg_secondary  %3  card          %4  hover
-//  %5  accent        %6  accent_hover  %7  accent2       %8  success
-//  %9  warning       %10 danger        %11 text(dup)     %12 text
-//  %13 text_sec      %14 border2       %15 input_bg      %16 input_focus
-//  %17 glow          %18 border        %19 sidebar_top   %20 sidebar_bot
-//  %21 dim
-// ─────────────────────────────────────────────────────────────────────────────
 QString ThemeProvider::buildStyleSheet(const Palette& c) {
-    return QStringLiteral(
-R"(
-/* ═══════════════════════════════════════════════════════════════════════════
+    // MSVC C2026: single string literal too large (>16 KB).
+    // Split into three QStringLiteral chunks that are concatenated before .arg() expansion.
+    const QString sheet =
+        QStringLiteral(
+R"(/* ═══════════════════════════════════════════════════════════════════════════
    GLOBAL
 ═══════════════════════════════════════════════════════════════════════════ */
 * {
@@ -232,7 +223,9 @@ QPushButton#btnAdd:disabled {
     border-color: %18;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+)")
+        + QStringLiteral(
+R"(/* ═══════════════════════════════════════════════════════════════════════════
    SECONDARY BUTTON
 ═══════════════════════════════════════════════════════════════════════════ */
 QPushButton#btnSecondary {
@@ -436,7 +429,9 @@ QProgressBar::chunk {
     border-radius: 3px;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+)")
+        + QStringLiteral(
+R"(/* ═══════════════════════════════════════════════════════════════════════════
    CHECKBOX
 ═══════════════════════════════════════════════════════════════════════════ */
 QCheckBox {
@@ -572,6 +567,8 @@ QToolTip {
     font-size: 11px;
 }
 )")
+        ;
+    return sheet
     .arg(c.bg_primary)    // %1
     .arg(c.bg_secondary)  // %2
     .arg(c.card)          // %3
