@@ -27,7 +27,7 @@ jobs:
 #  WINDOWS  (MSVC 2022, x64)
 # ────────────────────────────────────────────────────────────
   build-windows:
-    name: Windows · MSVC 2022 · Qt 6.8.3
+    name: Windows · MSVC 2022 · Qt ${{ env.QT_VERSION }}
     runs-on: windows-2022
 
     steps:
@@ -45,7 +45,6 @@ jobs:
           host:         windows
           target:       desktop
           arch:         win64_msvc2022_64
-          modules:      "qtnetwork"
           cache:        true
           cache-key-prefix: qt-windows-msvc2022
 
@@ -107,7 +106,7 @@ jobs:
 #  LINUX  (Ubuntu 22.04, GCC 12, x86_64)
 # ────────────────────────────────────────────────────────────
   build-linux:
-    name: Linux · GCC 12 · Qt 6.8.3
+    name: Linux · GCC 12 · Qt ${{ env.QT_VERSION }}
     runs-on: ubuntu-22.04
 
     steps:
@@ -152,7 +151,6 @@ jobs:
           host:         linux
           target:       desktop
           arch:         gcc_64
-          modules:      "qtnetwork"
           install-deps: true
           cache:        true
           cache-key-prefix: qt-linux-gcc64
@@ -246,7 +244,7 @@ jobs:
 #  macOS  (macOS 14 arm64, Clang, Qt universal)
 # ────────────────────────────────────────────────────────────
   build-macos:
-    name: macOS · Clang · Qt 6.8.3
+    name: macOS · Clang · Qt ${{ env.QT_VERSION }}
     runs-on: macos-14         # Apple Silicon (arm64); change to macos-13 for Intel
 
     steps:
@@ -262,7 +260,6 @@ jobs:
           host:         mac
           target:       desktop
           arch:         clang_64        # universal / arm64 on macos-14
-          modules:      "qtnetwork"
           cache:        true
           cache-key-prefix: qt-macos-clang64
 
