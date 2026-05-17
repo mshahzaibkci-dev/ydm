@@ -7,6 +7,7 @@
 #include "widgets/scheduledialog.h"
 #include "ytdlpupdateworker.h"
 #include "ffmpegupdateworker.h"
+#include "persistence.h"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>

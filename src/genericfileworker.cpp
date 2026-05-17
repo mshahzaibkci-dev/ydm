@@ -11,6 +11,7 @@
 #include <QRegularExpression>
 #include <QUrl>
 #include <QElapsedTimer>
+#include <QTimer>
 #include <deque>
 
 const char* GenericFileWorker::UA =

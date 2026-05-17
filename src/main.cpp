@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
     // Parse --tray flag (auto-minimise to tray at startup)
     bool startHidden = false;
     for (int i = 1; i < argc; ++i) {
-        if (QStringLiteral(argv[i]) == u"--tray"_qs)
+        if (QLatin1StringView(argv[i]) == "--tray")
             startHidden = true;
     }
 

@@ -40,7 +40,7 @@ QList<QVariantMap> loadHistory() {
 
 void saveHistory(const QList<QVariantMap>& entries) {
     QJsonArray arr;
-    int start = std::max(0, entries.size() - HISTORY_MAX_ENTRIES);
+    qsizetype start = std::max(qsizetype(0), entries.size() - HISTORY_MAX_ENTRIES);
     for (int i = start; i < entries.size(); ++i) {
         const auto& e = entries[i];
         QJsonObject o;

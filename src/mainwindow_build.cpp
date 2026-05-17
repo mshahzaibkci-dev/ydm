@@ -24,6 +24,7 @@
 #include <QPropertyAnimation>
 #include <QDir>
 #include <QFileDialog>
+#include <QHeaderView>
 
 // ─────────────────────────────────────────────
 //  buildUI() – assembles the complete shell

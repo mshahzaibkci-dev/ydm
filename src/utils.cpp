@@ -29,7 +29,8 @@ QString sanitizeFilename(const QString& name, const QString& fallback) {
     if (name.isEmpty()) return fallback;
 
     // Take last path component, URL-decode
-    QString n = QFileInfo(name.contains('\\') ? name.replace('\\', '/') : name)
+    QString nameCopy = name;
+    QString n = QFileInfo(nameCopy.contains('\\') ? nameCopy.replace('\\', '/') : nameCopy)
                     .fileName();
     n = QUrl::fromPercentEncoding(n.toUtf8());
     n = n.replace(s_badFnChars, u"_"_qs);

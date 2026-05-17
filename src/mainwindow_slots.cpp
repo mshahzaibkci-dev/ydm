@@ -13,6 +13,7 @@
 #include <QFileInfo>
 #include <QDateTime>
 #include <QHeaderView>
+#include <QStatusBar>
 #include <QTableWidgetItem>
 #include <QTimer>
 #include <QUrl>

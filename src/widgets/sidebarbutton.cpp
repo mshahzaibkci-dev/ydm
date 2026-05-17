@@ -12,7 +12,6 @@ SidebarButton::SidebarButton(const QString& text, const QIcon& icon, QWidget* pa
     setIcon(icon);
     setIconSize(QSize(18, 18));
     setText(text);
-    setToolButtonStyle(Qt::ToolButtonIconOnly); // not a QToolButton, but mirrors concept
 }
 
 void SidebarButton::setExpanded(bool expanded) {

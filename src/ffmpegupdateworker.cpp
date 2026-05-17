@@ -10,6 +10,7 @@
 #include <QFileInfo>
 #include <QTemporaryFile>
 #include <QProcess>
+#include <QTimer>
 
 const char* FfmpegUpdateWorker::RELEASES_URL =
     "https://github.com/yt-dlp/FFmpeg-Builds/releases/download/latest"
